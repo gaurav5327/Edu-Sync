@@ -6,8 +6,9 @@ function NotificationCenter() {
 
   useEffect(() => {
     // WebSocket connection for real-time notifications
-    const websocket = new WebSocket(`ws://localhost:3000/notifications`);
-    
+    const wsUrl = import.meta.env.VITE_WS_URL || "ws://localhost:3000";
+    const websocket = new WebSocket(`${wsUrl}/notifications`);
+
     websocket.onmessage = (event) => {
       const notification = JSON.parse(event.data);
       setNotifications(prev => [notification, ...prev]);
@@ -15,13 +16,13 @@ function NotificationCenter() {
     };
 
     setWs(websocket);
-    
+
     return () => websocket.close();
   }, []);
 
   const markAsRead = async (notificationId) => {
     await axios.patch(`/api/notifications/${notificationId}/read`);
-    setNotifications(prev => 
+    setNotifications(prev =>
       prev.map(n => n.id === notificationId ? { ...n, read: true } : n)
     );
     setUnreadCount(prev => Math.max(0, prev - 1));
@@ -35,7 +36,7 @@ function NotificationCenter() {
           <span className="unread-badge">{unreadCount}</span>
         )}
       </div>
-      
+
       <div className="notification-list">
         {notifications.map(notification => (
           <NotificationItem

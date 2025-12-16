@@ -38,8 +38,9 @@ import {
   GripVertical,
   Trash2,
 } from "lucide-react";
+import { API_BASE_URL } from "../config";
 
-const API_URL = "http://localhost:3000/api/schedule";
+const API_URL = `${API_BASE_URL}/schedule`;
 
 const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 const TIME_SLOTS = [
@@ -96,27 +97,23 @@ function DraggableSlot({
     return (
       <td
         ref={isDragMode ? setDroppableRef : setNodeRef}
-        className={`py-4 px-6 border-b border-gray-200 bg-gray-50 transition-all duration-200 min-h-[80px] ${
-          isDragMode
-            ? `border-2 border-dashed ${
-                isOver 
-                  ? "border-indigo-500 bg-indigo-100 scale-105" 
-                  : "border-gray-300 hover:border-indigo-400 hover:bg-indigo-50"
-              }`
+        className={`py-4 px-6 border-b border-gray-200 bg-gray-50 transition-all duration-200 min-h-[80px] ${isDragMode
+            ? `border-2 border-dashed ${isOver
+              ? "border-indigo-500 bg-indigo-100 scale-105"
+              : "border-gray-300 hover:border-indigo-400 hover:bg-indigo-50"
+            }`
             : ""
-        } ${isSelected ? "ring-2 ring-indigo-500 bg-indigo-50" : ""} ${
-          !isDragMode && onSlotClick ? "cursor-pointer hover:bg-indigo-100" : ""
-        }`}
+          } ${isSelected ? "ring-2 ring-indigo-500 bg-indigo-50" : ""} ${!isDragMode && onSlotClick ? "cursor-pointer hover:bg-indigo-100" : ""
+          }`}
         onClick={() => !isDragMode && onSlotClick && onSlotClick(day, timeSlot)}
       >
         <div className="flex items-center justify-center h-full min-h-[60px]">
-          <p className={`text-center text-sm transition-all duration-200 ${
-            isDragMode && isOver 
-              ? "text-indigo-600 font-semibold" 
+          <p className={`text-center text-sm transition-all duration-200 ${isDragMode && isOver
+              ? "text-indigo-600 font-semibold"
               : "text-gray-400"
-          }`}>
-            {isDragMode 
-              ? (isOver ? "Drop here!" : "Drop here") 
+            }`}>
+            {isDragMode
+              ? (isOver ? "Drop here!" : "Drop here")
               : "No class scheduled"
             }
           </p>
@@ -129,15 +126,12 @@ function DraggableSlot({
     <td
       ref={setNodeRef}
       style={style}
-      className={`py-4 px-6 border-b border-gray-200 transition-all duration-200 relative group ${
-        slot.course?.lectureType === "lab"
+      className={`py-4 px-6 border-b border-gray-200 transition-all duration-200 relative group ${slot.course?.lectureType === "lab"
           ? "bg-blue-50 border-l-4 border-blue-400"
           : "bg-green-50 border-l-4 border-green-400"
-      } ${isSelected ? "ring-2 ring-indigo-500 bg-indigo-50" : ""} ${
-        isDragMode ? "cursor-grab active:cursor-grabbing hover:shadow-lg" : ""
-      } ${
-        !isDragMode && onSlotClick ? "cursor-pointer hover:bg-indigo-100" : ""
-      } ${isDragging ? "opacity-50 shadow-2xl scale-105 z-50" : ""}`}
+        } ${isSelected ? "ring-2 ring-indigo-500 bg-indigo-50" : ""} ${isDragMode ? "cursor-grab active:cursor-grabbing hover:shadow-lg" : ""
+        } ${!isDragMode && onSlotClick ? "cursor-pointer hover:bg-indigo-100" : ""
+        } ${isDragging ? "opacity-50 shadow-2xl scale-105 z-50" : ""}`}
       onClick={() => !isDragMode && onSlotClick && onSlotClick(day, timeSlot)}
       {...(isDragMode ? { ...attributes, ...listeners } : {})}
     >
@@ -187,11 +181,10 @@ function DeleteZone() {
   return (
     <div
       ref={setNodeRef}
-      className={`mt-6 p-6 border-2 border-dashed rounded-xl text-center transition-all duration-200 ${
-        isOver
+      className={`mt-6 p-6 border-2 border-dashed rounded-xl text-center transition-all duration-200 ${isOver
           ? "border-red-500 bg-red-200 scale-105"
           : "border-red-300 bg-red-50 hover:border-red-400 hover:bg-red-100"
-      }`}
+        }`}
     >
       <div className="flex items-center justify-center space-x-2 text-red-600">
         <Trash2 className="w-6 h-6" />
@@ -212,9 +205,8 @@ function DragOverlayContent({ slot }) {
 
   return (
     <div
-      className={`p-4 rounded-lg shadow-2xl border-2 border-indigo-400 cursor-grabbing z-50 ${
-        slot.course?.lectureType === "lab" ? "bg-blue-100" : "bg-green-100"
-      }`}
+      className={`p-4 rounded-lg shadow-2xl border-2 border-indigo-400 cursor-grabbing z-50 ${slot.course?.lectureType === "lab" ? "bg-blue-100" : "bg-green-100"
+        }`}
       style={{
         pointerEvents: 'none', // Prevent interference with drop detection
         position: 'fixed', // Ensure proper positioning
@@ -389,8 +381,7 @@ function TimetableEditor() {
       console.error("Error updating schedule:", error);
       if (error.response?.data?.conflicts) {
         toast.error(
-          `Error: ${
-            error.response.data.message
+          `Error: ${error.response.data.message
           }. Conflicts detected: ${error.response.data.conflicts
             .map((c) => c.message)
             .join(", ")}`,
@@ -399,7 +390,7 @@ function TimetableEditor() {
       } else {
         toast.error(
           error.response?.data?.message ||
-            "Error updating schedule. Please try again.",
+          "Error updating schedule. Please try again.",
           { id: 'save-slot' }
         );
       }
@@ -596,7 +587,7 @@ function TimetableEditor() {
       console.error("Error saving changes:", error);
       toast.error(
         error.response?.data?.message ||
-          "Error saving changes. Please try again.",
+        "Error saving changes. Please try again.",
         { id: 'save-changes' }
       );
     } finally {
@@ -678,11 +669,10 @@ function TimetableEditor() {
           <div className="flex flex-wrap gap-4">
             <button
               onClick={handleToggleEditMode}
-              className={`group flex items-center space-x-2 px-6 py-3 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 ${
-                editMode
+              className={`group flex items-center space-x-2 px-6 py-3 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 ${editMode
                   ? "bg-gradient-to-r from-gray-500 to-gray-600 text-white hover:from-gray-600 hover:to-gray-700"
                   : "bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700"
-              }`}
+                }`}
             >
               {editMode ? (
                 <>
@@ -699,11 +689,10 @@ function TimetableEditor() {
 
             <button
               onClick={handleToggleDragMode}
-              className={`group flex items-center space-x-2 px-6 py-3 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 ${
-                dragMode
+              className={`group flex items-center space-x-2 px-6 py-3 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 ${dragMode
                   ? "bg-gradient-to-r from-gray-500 to-gray-600 text-white hover:from-gray-600 hover:to-gray-700"
                   : "bg-gradient-to-r from-green-600 to-emerald-600 text-white hover:from-green-700 hover:to-emerald-700"
-              }`}
+                }`}
             >
               {dragMode ? (
                 <>
@@ -723,9 +712,8 @@ function TimetableEditor() {
                 <button
                   onClick={handleSaveAllChanges}
                   disabled={loading}
-                  className={`group flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 ${
-                    loading ? "opacity-70 cursor-not-allowed" : ""
-                  }`}
+                  className={`group flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 ${loading ? "opacity-70 cursor-not-allowed" : ""
+                    }`}
                 >
                   {loading ? (
                     <>
@@ -966,9 +954,8 @@ function TimetableEditor() {
                 <button
                   onClick={handleSaveSlot}
                   disabled={loading}
-                  className={`group flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 ${
-                    loading ? "opacity-70 cursor-not-allowed" : ""
-                  }`}
+                  className={`group flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 ${loading ? "opacity-70 cursor-not-allowed" : ""
+                    }`}
                 >
                   {loading ? (
                     <>

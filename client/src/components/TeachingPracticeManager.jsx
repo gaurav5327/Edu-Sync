@@ -2,15 +2,15 @@
 
 import { useState, useEffect } from "react"
 import axios from "axios"
-import { 
-  GraduationCap, 
-  Plus, 
-  Edit3, 
-  Trash2, 
-  Users, 
-  MapPin, 
-  Clock, 
-  CheckCircle, 
+import {
+  GraduationCap,
+  Plus,
+  Edit3,
+  Trash2,
+  Users,
+  MapPin,
+  Clock,
+  CheckCircle,
   AlertTriangle,
   Calendar,
   User,
@@ -20,8 +20,9 @@ import {
   Award,
   Sparkles
 } from "lucide-react"
+import { API_BASE_URL } from "../config"
 
-const API_URL = "http://localhost:3000/api"
+const API_URL = API_BASE_URL
 
 function TeachingPracticeManager() {
   const [practices, setPractices] = useState([])
@@ -210,7 +211,7 @@ function TeachingPracticeManager() {
               <p className="text-gray-600">Manage student teaching practices and internships</p>
             </div>
           </div>
-          
+
           <button
             onClick={() => setShowForm(true)}
             className="group flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
@@ -502,9 +503,8 @@ function TeachingPracticeManager() {
                     <button
                       type="submit"
                       disabled={loading}
-                      className={`flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-105 ${
-                        loading ? "opacity-70 cursor-not-allowed" : ""
-                      }`}
+                      className={`flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-105 ${loading ? "opacity-70 cursor-not-allowed" : ""
+                        }`}
                     >
                       {loading ? (
                         <>
@@ -533,7 +533,7 @@ function TeachingPracticeManager() {
               Teaching Practices
             </h3>
           </div>
-          
+
           <div className="divide-y divide-gray-200">
             {practices.map((practice) => (
               <div key={practice._id} className="p-6 hover:bg-gray-50 transition-colors duration-200">
@@ -557,7 +557,7 @@ function TeachingPracticeManager() {
                         {practice.status}
                       </span>
                     </div>
-                    
+
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                       <div className="bg-blue-50 p-3 rounded-lg">
                         <div className="flex items-center space-x-2">
@@ -584,7 +584,7 @@ function TeachingPracticeManager() {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="flex space-x-2 ml-4">
                     <button
                       onClick={() => handleEdit(practice)}
@@ -605,7 +605,7 @@ function TeachingPracticeManager() {
               </div>
             ))}
           </div>
-          
+
           {practices.length === 0 && (
             <div className="text-center py-12">
               <div className="bg-gradient-to-r from-gray-100 to-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">

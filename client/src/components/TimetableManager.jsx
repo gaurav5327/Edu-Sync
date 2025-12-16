@@ -3,21 +3,22 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 import ScheduleDisplay from "./ScheduleDisplay"
-import { 
-  Calendar, 
-  Clock, 
-  Eye, 
-  Trash2, 
-  Building, 
-  Filter, 
-  CheckCircle, 
+import {
+  Calendar,
+  Clock,
+  Eye,
+  Trash2,
+  Building,
+  Filter,
+  CheckCircle,
   AlertTriangle,
   Loader2,
   X,
   Sparkles
 } from "lucide-react"
+import { API_BASE_URL } from "../config"
 
-const API_URL = "http://localhost:3000/api/schedule"
+const API_URL = `${API_BASE_URL}/schedule`
 
 const YEARS = [1, 2, 3, 4]
 const BRANCHES = [
@@ -104,7 +105,7 @@ function TimetableManager() {
           <Filter className="w-5 h-5 text-blue-600" />
           <h3 className="text-lg font-semibold text-gray-900">Filter Timetables</h3>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Year</label>

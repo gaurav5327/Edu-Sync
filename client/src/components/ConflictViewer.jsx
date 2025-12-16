@@ -1,7 +1,8 @@
 import { useState } from "react"
 import axios from "axios"
+import { API_BASE_URL } from "../config"
 
-const API_URL = "http://localhost:3000/api/schedule"
+const API_URL = `${API_BASE_URL}/schedule`
 const YEARS = [1, 2, 3, 4]
 const BRANCHES = ["Computer Science", "Electrical Engineering", "Mechanical Engineering", "Civil Engineering"]
 const DIVISIONS = ["A", "B", "C"]

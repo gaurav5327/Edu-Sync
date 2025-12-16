@@ -3,16 +3,16 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 import toast from "react-hot-toast"
-import { 
-  FlaskConical, 
-  Plus, 
-  Play, 
-  Copy, 
-  Eye, 
-  BarChart3, 
-  Settings, 
-  CheckCircle, 
-  AlertTriangle, 
+import {
+  FlaskConical,
+  Plus,
+  Play,
+  Copy,
+  Eye,
+  BarChart3,
+  Settings,
+  CheckCircle,
+  AlertTriangle,
   Clock,
   Users,
   Building,
@@ -20,8 +20,9 @@ import {
   Trash2,
   Edit3
 } from "lucide-react"
+import { API_BASE_URL } from "../config"
 
-const API_URL = "http://localhost:3000/api"
+const API_URL = API_BASE_URL
 
 function ScenarioSimulator() {
   const [scenarios, setScenarios] = useState([])
@@ -191,7 +192,7 @@ function ScenarioSimulator() {
               <p className="text-gray-600">Test different scheduling scenarios and compare outcomes</p>
             </div>
           </div>
-          
+
           <div className="flex flex-wrap gap-3">
             <button
               onClick={() => setShowForm(true)}
@@ -486,9 +487,8 @@ function ScenarioSimulator() {
                     <button
                       type="submit"
                       disabled={loading}
-                      className={`flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-105 ${
-                        loading ? "opacity-70 cursor-not-allowed" : ""
-                      }`}
+                      className={`flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-105 ${loading ? "opacity-70 cursor-not-allowed" : ""
+                        }`}
                     >
                       {loading ? (
                         <>
@@ -580,7 +580,7 @@ function ScenarioSimulator() {
               Scenarios
             </h3>
           </div>
-          
+
           <div className="divide-y divide-gray-200">
             {scenarios.map((scenario) => (
               <div key={scenario._id} className="p-6 hover:bg-gray-50 transition-colors duration-200">

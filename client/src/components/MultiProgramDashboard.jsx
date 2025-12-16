@@ -18,8 +18,9 @@ import {
   Eye,
   Settings,
 } from "lucide-react";
+import { API_BASE_URL } from "../config";
 
-const API_URL = "http://localhost:3000/api";
+const API_URL = API_BASE_URL;
 
 function MultiProgramDashboard() {
   const [programs, setPrograms] = useState([]);
@@ -127,7 +128,7 @@ function MultiProgramDashboard() {
     const totalCourses = courses.length;
     const avgCredits =
       students.reduce((sum, s) => sum + (s.enrolledCredits || 0), 0) /
-        totalStudents || 0;
+      totalStudents || 0;
 
     const yearDistribution = config.years.reduce((acc, year) => {
       acc[year] = students.filter((s) => s.year === year).length;
@@ -360,13 +361,12 @@ function MultiProgramDashboard() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span
-                        className={`inline-flex px-3 py-1 text-xs font-bold rounded-full ${
-                          metrics.complianceRate >= 80
+                        className={`inline-flex px-3 py-1 text-xs font-bold rounded-full ${metrics.complianceRate >= 80
                             ? "bg-green-100 text-green-800"
                             : metrics.complianceRate >= 60
-                            ? "bg-yellow-100 text-yellow-800"
-                            : "bg-red-100 text-red-800"
-                        }`}
+                              ? "bg-yellow-100 text-yellow-800"
+                              : "bg-red-100 text-red-800"
+                          }`}
                       >
                         {metrics.complianceRate}%
                       </span>
@@ -482,22 +482,20 @@ function MultiProgramDashboard() {
           <div className="flex border border-gray-300 rounded-xl overflow-hidden bg-white/80 backdrop-blur-sm">
             <button
               onClick={() => setViewMode("overview")}
-              className={`flex items-center space-x-2 px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                viewMode === "overview"
+              className={`flex items-center space-x-2 px-4 py-2 text-sm font-medium transition-all duration-200 ${viewMode === "overview"
                   ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
                   : "bg-white text-gray-700 hover:bg-gray-50"
-              }`}
+                }`}
             >
               <Eye className="w-4 h-4" />
               <span>Overview</span>
             </button>
             <button
               onClick={() => setViewMode("comparison")}
-              className={`flex items-center space-x-2 px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                viewMode === "comparison"
+              className={`flex items-center space-x-2 px-4 py-2 text-sm font-medium transition-all duration-200 ${viewMode === "comparison"
                   ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
                   : "bg-white text-gray-700 hover:bg-gray-50"
-              }`}
+                }`}
             >
               <BarChart3 className="w-4 h-4" />
               <span>Comparison</span>
@@ -604,8 +602,8 @@ function MultiProgramDashboard() {
                 const percentage =
                   totalCourses > 0
                     ? Math.round(
-                        (multidisciplinaryCourses / totalCourses) * 100
-                      )
+                      (multidisciplinaryCourses / totalCourses) * 100
+                    )
                     : 0;
 
                 return (
@@ -655,13 +653,12 @@ function MultiProgramDashboard() {
                       </span>
                     </div>
                     <span
-                      className={`text-sm font-bold px-3 py-1 rounded-full ${
-                        metrics.complianceRate >= 80
+                      className={`text-sm font-bold px-3 py-1 rounded-full ${metrics.complianceRate >= 80
                           ? "bg-green-100 text-green-800"
                           : metrics.complianceRate >= 60
-                          ? "bg-yellow-100 text-yellow-800"
-                          : "bg-red-100 text-red-800"
-                      }`}
+                            ? "bg-yellow-100 text-yellow-800"
+                            : "bg-red-100 text-red-800"
+                        }`}
                     >
                       {metrics.complianceRate}% compliant
                     </span>

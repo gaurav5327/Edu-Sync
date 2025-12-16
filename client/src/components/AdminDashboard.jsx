@@ -43,8 +43,9 @@ import {
   AlertTriangle,
   Sparkles,
 } from "lucide-react";
+import { API_BASE_URL } from "../config";
 
-const API_URL = "http://localhost:3000/api/schedule";
+const API_URL = `${API_BASE_URL}/schedule`;
 
 // Conflict Resolution Section Component
 function ConflictResolutionSection({ selectedYear, selectedBranch, selectedDivision, onScheduleUpdate, onError }) {
@@ -163,9 +164,8 @@ function ConflictResolutionSection({ selectedYear, selectedBranch, selectedDivis
                     className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm"
                   >
                     <div className="flex items-center mb-2">
-                      <div className={`w-3 h-3 rounded-full mr-2 ${
-                        conflict.type === "room" ? "bg-red-500" : "bg-orange-500"
-                      }`}></div>
+                      <div className={`w-3 h-3 rounded-full mr-2 ${conflict.type === "room" ? "bg-red-500" : "bg-orange-500"
+                        }`}></div>
                       <h4 className="font-semibold text-gray-900">
                         {conflict.type === "room" ? "Room Conflict" : "Instructor Conflict"}
                       </h4>
@@ -334,8 +334,7 @@ function ManualScheduleChange({ notification, onClose, onSuccess }) {
       console.error("Error updating schedule:", error);
       if (error.response?.data?.conflicts) {
         setError(
-          `Error: ${
-            error.response.data.message
+          `Error: ${error.response.data.message
           }. Conflicts detected: ${error.response.data.conflicts
             .map((c) => c.message)
             .join(", ")}`
@@ -343,7 +342,7 @@ function ManualScheduleChange({ notification, onClose, onSuccess }) {
       } else {
         setError(
           error.response?.data?.message ||
-            "Error updating schedule. Please try again."
+          "Error updating schedule. Please try again."
         );
       }
     } finally {
@@ -613,9 +612,8 @@ function ManualScheduleChange({ notification, onClose, onSuccess }) {
               <button
                 type="submit"
                 disabled={loading}
-                className={`flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-105 ${
-                  loading ? "opacity-70 cursor-not-allowed" : ""
-                }`}
+                className={`flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-200 transform hover:scale-105 ${loading ? "opacity-70 cursor-not-allowed" : ""
+                  }`}
               >
                 {loading ? (
                   <>
@@ -834,9 +832,8 @@ function AdminDashboard() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 flex">
       {/* Enhanced Sidebar */}
       <div
-        className={`${
-          sidebarCollapsed ? "w-20" : "w-80"
-        } transition-all duration-300 ease-in-out flex-shrink-0`}
+        className={`${sidebarCollapsed ? "w-20" : "w-80"
+          } transition-all duration-300 ease-in-out flex-shrink-0`}
       >
         <div className="h-full bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-600 shadow-2xl relative overflow-hidden">
           {/* Background decorations - matching HomePage */}
@@ -868,9 +865,8 @@ function AdminDashboard() {
                   className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-all duration-200"
                 >
                   <ArrowLeft
-                    className={`w-4 h-4 transition-transform duration-300 ${
-                      sidebarCollapsed ? "rotate-180" : ""
-                    }`}
+                    className={`w-4 h-4 transition-transform duration-300 ${sidebarCollapsed ? "rotate-180" : ""
+                      }`}
                   />
                 </button>
               </div>
@@ -885,19 +881,17 @@ function AdminDashboard() {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`group w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-300 ${
-                      isActive
+                    className={`group w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-300 ${isActive
                         ? "bg-white/20 text-white shadow-lg backdrop-blur-sm border border-white/20"
                         : "text-blue-200 hover:text-white hover:bg-white/10"
-                    }`}
+                      }`}
                     title={sidebarCollapsed ? tab.label : ""}
                   >
                     <Icon
-                      className={`w-5 h-5 transition-all duration-300 ${
-                        isActive
+                      className={`w-5 h-5 transition-all duration-300 ${isActive
                           ? "rotate-12 scale-110"
                           : "group-hover:rotate-12 group-hover:scale-110"
-                      }`}
+                        }`}
                     />
                     {!sidebarCollapsed && (
                       <span className="font-medium text-sm">{tab.label}</span>
@@ -1024,13 +1018,12 @@ function AdminDashboard() {
                     {notifications.map((notification) => (
                       <div
                         key={notification._id}
-                        className={`border rounded-xl p-4 transition-all duration-200 hover:shadow-md ${
-                          notification.type === "SCHEDULE_CHANGE_REQUEST"
+                        className={`border rounded-xl p-4 transition-all duration-200 hover:shadow-md ${notification.type === "SCHEDULE_CHANGE_REQUEST"
                             ? "bg-blue-50 border-blue-200"
                             : notification.type === "TEACHER_ABSENCE"
-                            ? "bg-yellow-50 border-yellow-200"
-                            : "bg-gray-50 border-gray-200"
-                        }`}
+                              ? "bg-yellow-50 border-yellow-200"
+                              : "bg-gray-50 border-gray-200"
+                          }`}
                       >
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
@@ -1157,9 +1150,8 @@ function AdminDashboard() {
                       <button
                         onClick={generateSchedule}
                         disabled={isLoading}
-                        className={`group flex items-center justify-center space-x-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 ${
-                          isLoading ? "opacity-70 cursor-not-allowed" : ""
-                        }`}
+                        className={`group flex items-center justify-center space-x-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 ${isLoading ? "opacity-70 cursor-not-allowed" : ""
+                          }`}
                       >
                         {isLoading ? (
                           <>
@@ -1185,7 +1177,7 @@ function AdminDashboard() {
                   </div>
 
                   {/* Conflict Resolution */}
-                  <ConflictResolutionSection 
+                  <ConflictResolutionSection
                     selectedYear={selectedYear}
                     selectedBranch={selectedBranch}
                     selectedDivision={selectedDivision}

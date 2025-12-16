@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { API_BASE_URL } from "../config";
 
-const API_URL = "http://localhost:3000/api";
+const API_URL = API_BASE_URL;
 
 function ConflictResolution() {
   const [conflicts, setConflicts] = useState([]);
@@ -186,9 +187,8 @@ function ConflictResolution() {
           >
             <div className="flex items-center mb-4">
               <div
-                className={`w-4 h-4 rounded-full mr-3 ${
-                  conflict.type === "room" ? "bg-red-500" : "bg-orange-500"
-                }`}
+                className={`w-4 h-4 rounded-full mr-3 ${conflict.type === "room" ? "bg-red-500" : "bg-orange-500"
+                  }`}
               ></div>
               <h2 className="text-xl font-bold text-gray-900">
                 {conflict.type === "room"

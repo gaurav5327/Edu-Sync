@@ -31,8 +31,9 @@ import {
   Crown,
   Star,
 } from "lucide-react";
+import { API_BASE_URL } from "../config";
 
-const API_URL = "http://localhost:3000/api/auth";
+const API_URL = `${API_BASE_URL}/auth`;
 
 function AdminRegistration() {
   const [formData, setFormData] = useState({

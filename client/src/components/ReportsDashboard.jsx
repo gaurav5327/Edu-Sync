@@ -1,21 +1,22 @@
 import { useEffect, useState, useMemo } from "react"
 import axios from "axios"
 import ScheduleDisplay from "./ScheduleDisplay"
-import { 
-  BarChart3, 
-  Users, 
-  Building, 
-  Clock, 
-  TrendingUp, 
-  FileText, 
-  Eye, 
+import {
+  BarChart3,
+  Users,
+  Building,
+  Clock,
+  TrendingUp,
+  FileText,
+  Eye,
   Download,
   AlertTriangle,
   CheckCircle,
   Sparkles
 } from "lucide-react"
+import { API_BASE_URL } from "../config"
 
-const API_URL = "http://localhost:3000/api/schedule"
+const API_URL = `${API_BASE_URL}/schedule`
 
 export default function ReportsDashboard() {
   const [year, setYear] = useState(1)
@@ -95,13 +96,13 @@ export default function ReportsDashboard() {
             </div>
             <h2 className="text-xl font-bold text-gray-900">Filter Options</h2>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Year</label>
-              <select 
-                value={year} 
-                onChange={(e) => setYear(Number(e.target.value))} 
+              <select
+                value={year}
+                onChange={(e) => setYear(Number(e.target.value))}
                 className="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
               >
                 {[1, 2, 3, 4].map((y) => (
@@ -111,12 +112,12 @@ export default function ReportsDashboard() {
                 ))}
               </select>
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Branch</label>
-              <select 
-                value={branch} 
-                onChange={(e) => setBranch(e.target.value)} 
+              <select
+                value={branch}
+                onChange={(e) => setBranch(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
               >
                 {["Computer Science", "Electrical Engineering", "Mechanical Engineering", "Civil Engineering"].map((b) => (
@@ -126,12 +127,12 @@ export default function ReportsDashboard() {
                 ))}
               </select>
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Division</label>
-              <select 
-                value={division} 
-                onChange={(e) => setDivision(e.target.value)} 
+              <select
+                value={division}
+                onChange={(e) => setDivision(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
               >
                 {["A", "B", "C"].map((d) => (
@@ -178,18 +179,17 @@ export default function ReportsDashboard() {
                 <h2 className="text-xl font-bold text-gray-900">Teacher Workload</h2>
                 <span className="text-sm text-gray-500">(hours per week)</span>
               </div>
-              
+
               <div className="space-y-3 max-h-64 overflow-y-auto">
                 {teacherWorkload.length > 0 ? (
                   teacherWorkload.map((teacher, index) => (
                     <div key={teacher.name} className="flex items-center justify-between p-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-200">
                       <div className="flex items-center space-x-3">
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm ${
-                          index === 0 ? 'bg-gradient-to-r from-yellow-400 to-orange-400' :
-                          index === 1 ? 'bg-gradient-to-r from-gray-400 to-gray-500' :
-                          index === 2 ? 'bg-gradient-to-r from-orange-400 to-red-400' :
-                          'bg-gradient-to-r from-blue-400 to-indigo-400'
-                        }`}>
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm ${index === 0 ? 'bg-gradient-to-r from-yellow-400 to-orange-400' :
+                            index === 1 ? 'bg-gradient-to-r from-gray-400 to-gray-500' :
+                              index === 2 ? 'bg-gradient-to-r from-orange-400 to-red-400' :
+                                'bg-gradient-to-r from-blue-400 to-indigo-400'
+                          }`}>
                           {index + 1}
                         </div>
                         <span className="font-medium text-gray-900">{teacher.name}</span>
@@ -218,18 +218,17 @@ export default function ReportsDashboard() {
                 <h2 className="text-xl font-bold text-gray-900">Room Utilization</h2>
                 <span className="text-sm text-gray-500">(slots used)</span>
               </div>
-              
+
               <div className="space-y-3 max-h-64 overflow-y-auto">
                 {roomUtilization.length > 0 ? (
                   roomUtilization.map((room, index) => (
                     <div key={room.name} className="flex items-center justify-between p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-200">
                       <div className="flex items-center space-x-3">
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm ${
-                          index === 0 ? 'bg-gradient-to-r from-yellow-400 to-orange-400' :
-                          index === 1 ? 'bg-gradient-to-r from-gray-400 to-gray-500' :
-                          index === 2 ? 'bg-gradient-to-r from-orange-400 to-red-400' :
-                          'bg-gradient-to-r from-green-400 to-emerald-400'
-                        }`}>
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm ${index === 0 ? 'bg-gradient-to-r from-yellow-400 to-orange-400' :
+                            index === 1 ? 'bg-gradient-to-r from-gray-400 to-gray-500' :
+                              index === 2 ? 'bg-gradient-to-r from-orange-400 to-red-400' :
+                                'bg-gradient-to-r from-green-400 to-emerald-400'
+                          }`}>
                           {index + 1}
                         </div>
                         <span className="font-medium text-gray-900">{room.name}</span>
@@ -260,7 +259,7 @@ export default function ReportsDashboard() {
               </div>
               <h2 className="text-xl font-bold text-gray-900">Timetable Preview</h2>
             </div>
-            
+
             <div className="flex items-center space-x-3">
               {selected && (
                 <span className="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
@@ -277,7 +276,7 @@ export default function ReportsDashboard() {
               </button>
             </div>
           </div>
-          
+
           <div className="border-t border-gray-200 pt-6">
             {selected ? (
               <ScheduleDisplay schedule={selected} />

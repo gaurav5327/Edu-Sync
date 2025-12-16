@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import toast from 'react-hot-toast';
 import { BookOpen, User, Clock, Users, CheckCircle, AlertTriangle, Plus, Sparkles } from "lucide-react";
+import { API_BASE_URL } from "../config";
 
-const API_URL = "http://localhost:3000/api/schedule";
+const API_URL = `${API_BASE_URL}/schedule`;
 
 const TIME_SLOTS = [
   { value: "09:00", label: "09:00 AM" },
@@ -131,8 +132,7 @@ function CourseForm({ addCourse }) {
       await addCourse(formData);
 
       setSuccess(
-        `${
-          formData.lectureType === "theory" ? "Theory" : "Lab"
+        `${formData.lectureType === "theory" ? "Theory" : "Lab"
         } course added successfully!`
       );
 
@@ -182,7 +182,7 @@ function CourseForm({ addCourse }) {
       console.error("Error adding course:", error);
       setError(
         error.response?.data?.message ||
-          "An error occurred while adding the course"
+        "An error occurred while adding the course"
       );
     }
   };
@@ -310,9 +310,8 @@ function CourseForm({ addCourse }) {
             value={formData.duration}
             onChange={handleChange}
             readOnly={formData.lectureType === "lab"}
-            className={`w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 hover:border-indigo-300 ${
-              formData.lectureType === "lab" ? "bg-gray-50" : ""
-            }`}
+            className={`w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 hover:border-indigo-300 ${formData.lectureType === "lab" ? "bg-gray-50" : ""
+              }`}
             placeholder="Enter duration in minutes"
             required
           />
@@ -350,11 +349,10 @@ function CourseForm({ addCourse }) {
             {TIME_SLOTS.map((slot) => (
               <label
                 key={slot.value}
-                className={`flex items-center p-3 rounded-lg border transition-all duration-200 cursor-pointer hover:bg-white hover:border-indigo-300 hover:shadow-sm ${
-                  formData.preferredTimeSlots.includes(slot.value)
+                className={`flex items-center p-3 rounded-lg border transition-all duration-200 cursor-pointer hover:bg-white hover:border-indigo-300 hover:shadow-sm ${formData.preferredTimeSlots.includes(slot.value)
                     ? "bg-indigo-50 border-indigo-300"
                     : "bg-white border-gray-200"
-                }`}
+                  }`}
               >
                 <input
                   type="checkbox"

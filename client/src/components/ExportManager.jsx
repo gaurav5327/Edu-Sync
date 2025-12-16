@@ -2,8 +2,9 @@
 
 import { useState } from "react"
 import axios from "axios"
+import { API_BASE_URL } from "../config"
 
-const API_URL = "http://localhost:3000/api"
+const API_URL = API_BASE_URL
 
 function ExportManager() {
   const [loading, setLoading] = useState(false)

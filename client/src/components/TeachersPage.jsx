@@ -4,8 +4,9 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import Navbar from "./Navbar"
 import { Users, GraduationCap, Building, Award, Loader2, AlertTriangle, Sparkles, User } from "lucide-react"
+import { API_BASE_URL } from "../config"
 
-const API_URL = "http://localhost:3000/api/schedule"
+const API_URL = `${API_BASE_URL}/schedule`
 
 function TeachersPage() {
   const [teachers, setTeachers] = useState([])
@@ -92,7 +93,7 @@ function TeachersPage() {
               </div>
             </div>
           </div>
-          
+
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-4 lg:mb-6">
             <span className="block">Our Teachers</span>
             <span className="block bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-400 bg-clip-text text-transparent animate-pulse">
@@ -104,9 +105,9 @@ function TeachersPage() {
             <span className="text-blue-100 font-semibold text-lg">Dedicated • Experienced • Inspiring</span>
             <Sparkles className="w-5 h-5 text-yellow-400 ml-2" />
           </div>
-          
+
           <p className="mt-6 max-w-xl mx-auto text-xl text-blue-100 leading-relaxed">
-            Meet our dedicated faculty members who make learning a 
+            Meet our dedicated faculty members who make learning a
             <span className="text-yellow-400 font-semibold"> wonderful experience</span> for every student.
           </p>
         </div>
@@ -152,16 +153,15 @@ function TeachersPage() {
                         }
                       }, 100);
                     }}
-                    className={`px-4 py-2 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 ${
-                      selectedDepartment === dept
+                    className={`px-4 py-2 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 ${selectedDepartment === dept
                         ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg"
                         : "bg-white/70 text-gray-700 hover:bg-white/90 border border-gray-200"
-                    }`}
+                      }`}
                   >
                     {dept}
                     <span className="ml-2 text-xs opacity-75">
-                      ({dept === "All" 
-                        ? teachers.length 
+                      ({dept === "All"
+                        ? teachers.length
                         : teachers.filter(t => (t.department || 'Other') === dept).length
                       })
                     </span>
@@ -188,126 +188,126 @@ function TeachersPage() {
                     return acc;
                   }, {})
                 )
-                .filter(([department]) => selectedDepartment === "All" || department === selectedDepartment)
-                .map(([department, departmentTeachers]) => (
-                  <div 
-                    key={department} 
-                    className="space-y-6 animate-fade-in"
-                    style={{
-                      animation: 'fadeIn 0.5s ease-in-out'
-                    }}
-                  >
-                    {/* Department Header */}
-                    <div className="text-center">
-                      <div className="inline-flex items-center space-x-3 bg-white/90 backdrop-blur-lg rounded-2xl shadow-lg border border-white/30 px-8 py-4">
-                        <div className="bg-gradient-to-r from-indigo-500 to-purple-500 p-3 rounded-xl">
-                          <Building className="w-6 h-6 text-white" />
-                        </div>
-                        <div>
-                          <h2 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                            {department} Department
-                          </h2>
-                          <p className="text-sm text-gray-600 font-medium">
-                            {departmentTeachers.length} {departmentTeachers.length === 1 ? 'Faculty Member' : 'Faculty Members'}
-                          </p>
+                  .filter(([department]) => selectedDepartment === "All" || department === selectedDepartment)
+                  .map(([department, departmentTeachers]) => (
+                    <div
+                      key={department}
+                      className="space-y-6 animate-fade-in"
+                      style={{
+                        animation: 'fadeIn 0.5s ease-in-out'
+                      }}
+                    >
+                      {/* Department Header */}
+                      <div className="text-center">
+                        <div className="inline-flex items-center space-x-3 bg-white/90 backdrop-blur-lg rounded-2xl shadow-lg border border-white/30 px-8 py-4">
+                          <div className="bg-gradient-to-r from-indigo-500 to-purple-500 p-3 rounded-xl">
+                            <Building className="w-6 h-6 text-white" />
+                          </div>
+                          <div>
+                            <h2 className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                              {department} Department
+                            </h2>
+                            <p className="text-sm text-gray-600 font-medium">
+                              {departmentTeachers.length} {departmentTeachers.length === 1 ? 'Faculty Member' : 'Faculty Members'}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    {/* Department Teachers Grid */}
-                    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                      {departmentTeachers.map((teacher) => (
-                        <div
-                          key={teacher._id}
-                          className="group bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
-                        >
-                          {/* Teacher Avatar */}
-                          <div className="relative p-6 pb-4">
-                            <div className="flex justify-center mb-4">
-                              <div className="relative">
-                                <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full blur-sm opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
-                                <div className="relative w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg group-hover:scale-110 transition-transform duration-300">
-                                  {teacher.name.charAt(0).toUpperCase()}
-                                </div>
-                              </div>
-                            </div>
-                            
-                            <div className="text-center">
-                              <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors duration-300">
-                                {teacher.name}
-                              </h3>
-                              <div className="flex items-center justify-center space-x-2 mb-3">
-                                <Building className="w-4 h-4 text-gray-500" />
-                                <p className="text-sm text-gray-600 font-medium">
-                                  {teacher.department}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Teacher Details */}
-                          <div className="px-6 pb-6">
-                            <div className="space-y-3">
-                              {teacher.expertise && teacher.expertise.length > 0 && (
-                                <div className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-lg p-3">
-                                  <div className="flex items-center space-x-2 mb-1">
-                                    <Award className="w-4 h-4 text-purple-600" />
-                                    <span className="text-sm font-semibold text-gray-700">Expertise</span>
-                                  </div>
-                                  <div className="ml-6">
-                                    <div className="flex flex-wrap gap-1">
-                                      {teacher.expertise.slice(0, 3).map((skill, index) => (
-                                        <span
-                                          key={index}
-                                          className="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full border border-purple-200"
-                                        >
-                                          {skill}
-                                        </span>
-                                      ))}
-                                      {teacher.expertise.length > 3 && (
-                                        <span className="inline-block bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full border border-gray-200">
-                                          +{teacher.expertise.length - 3} more
-                                        </span>
-                                      )}
-                                    </div>
+                      {/* Department Teachers Grid */}
+                      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                        {departmentTeachers.map((teacher) => (
+                          <div
+                            key={teacher._id}
+                            className="group bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                          >
+                            {/* Teacher Avatar */}
+                            <div className="relative p-6 pb-4">
+                              <div className="flex justify-center mb-4">
+                                <div className="relative">
+                                  <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full blur-sm opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+                                  <div className="relative w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                    {teacher.name.charAt(0).toUpperCase()}
                                   </div>
                                 </div>
-                              )}
-                              
-                              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-3">
-                                <div className="flex items-center space-x-2 mb-1">
-                                  <Users className="w-4 h-4 text-blue-600" />
-                                  <span className="text-sm font-semibold text-gray-700">Teaching Years</span>
-                                </div>
-                                <p className="text-sm text-gray-600 ml-6">
-                                  {teacher.teachableYears?.length > 0 
-                                    ? `Year ${teacher.teachableYears.join(", ")}` 
-                                    : "All years"
-                                  }
-                                </p>
                               </div>
 
-                              {teacher.maxWeeklyLoad && (
-                                <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-3">
-                                  <div className="flex items-center space-x-2 mb-1">
-                                    <GraduationCap className="w-4 h-4 text-green-600" />
-                                    <span className="text-sm font-semibold text-gray-700">Weekly Load</span>
-                                  </div>
-                                  <p className="text-sm text-gray-600 ml-6">
-                                    {teacher.maxWeeklyLoad} hours/week
+                              <div className="text-center">
+                                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors duration-300">
+                                  {teacher.name}
+                                </h3>
+                                <div className="flex items-center justify-center space-x-2 mb-3">
+                                  <Building className="w-4 h-4 text-gray-500" />
+                                  <p className="text-sm text-gray-600 font-medium">
+                                    {teacher.department}
                                   </p>
                                 </div>
-                              )}
+                              </div>
                             </div>
-                          </div>
 
-                          {/* Hover Effect Overlay */}
-                          <div className="absolute inset-0 bg-gradient-to-t from-green-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                        </div>
-                      ))}
+                            {/* Teacher Details */}
+                            <div className="px-6 pb-6">
+                              <div className="space-y-3">
+                                {teacher.expertise && teacher.expertise.length > 0 && (
+                                  <div className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-lg p-3">
+                                    <div className="flex items-center space-x-2 mb-1">
+                                      <Award className="w-4 h-4 text-purple-600" />
+                                      <span className="text-sm font-semibold text-gray-700">Expertise</span>
+                                    </div>
+                                    <div className="ml-6">
+                                      <div className="flex flex-wrap gap-1">
+                                        {teacher.expertise.slice(0, 3).map((skill, index) => (
+                                          <span
+                                            key={index}
+                                            className="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full border border-purple-200"
+                                          >
+                                            {skill}
+                                          </span>
+                                        ))}
+                                        {teacher.expertise.length > 3 && (
+                                          <span className="inline-block bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full border border-gray-200">
+                                            +{teacher.expertise.length - 3} more
+                                          </span>
+                                        )}
+                                      </div>
+                                    </div>
+                                  </div>
+                                )}
+
+                                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-3">
+                                  <div className="flex items-center space-x-2 mb-1">
+                                    <Users className="w-4 h-4 text-blue-600" />
+                                    <span className="text-sm font-semibold text-gray-700">Teaching Years</span>
+                                  </div>
+                                  <p className="text-sm text-gray-600 ml-6">
+                                    {teacher.teachableYears?.length > 0
+                                      ? `Year ${teacher.teachableYears.join(", ")}`
+                                      : "All years"
+                                    }
+                                  </p>
+                                </div>
+
+                                {teacher.maxWeeklyLoad && (
+                                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-3">
+                                    <div className="flex items-center space-x-2 mb-1">
+                                      <GraduationCap className="w-4 h-4 text-green-600" />
+                                      <span className="text-sm font-semibold text-gray-700">Weekly Load</span>
+                                    </div>
+                                    <p className="text-sm text-gray-600 ml-6">
+                                      {teacher.maxWeeklyLoad} hours/week
+                                    </p>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+
+                            {/* Hover Effect Overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-green-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             ) : (
               <div className="text-center py-20">
@@ -327,7 +327,7 @@ function TeachersPage() {
         {!loading && !error && teachers.length > 0 && (
           <div className="mt-16 bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 p-8">
             <h2 className="text-2xl font-bold text-center text-gray-900 mb-8">Faculty Statistics</h2>
-            
+
             {/* Main Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
               <div className="text-center">
@@ -337,7 +337,7 @@ function TeachersPage() {
                 <div className="text-3xl font-bold text-green-600 mb-2">{teachers.length}</div>
                 <div className="text-gray-600 font-medium">Total Faculty</div>
               </div>
-              
+
               <div className="text-center">
                 <div className="bg-gradient-to-r from-blue-500 to-indigo-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Building className="w-8 h-8 text-white" />
@@ -347,7 +347,7 @@ function TeachersPage() {
                 </div>
                 <div className="text-gray-600 font-medium">Departments</div>
               </div>
-              
+
               <div className="text-center">
                 <div className="bg-gradient-to-r from-purple-500 to-pink-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <GraduationCap className="w-8 h-8 text-white" />

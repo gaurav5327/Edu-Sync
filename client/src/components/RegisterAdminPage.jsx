@@ -5,8 +5,9 @@ import { useNavigate, Link } from "react-router-dom"
 import axios from "axios"
 import Navbar from "./Navbar"
 import { User, Mail, Lock, Shield, Building, Eye, EyeOff, UserPlus, CheckCircle, AlertCircle, Loader2 } from "lucide-react"
+import { API_BASE_URL } from "../config"
 
-const API_URL = "http://localhost:3000/api/auth"
+const API_URL = `${API_BASE_URL}/auth`
 
 function RegisterAdminPage() {
   const navigate = useNavigate()
@@ -268,9 +269,8 @@ function RegisterAdminPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className={`group relative w-full flex justify-center items-center py-3 px-4 border border-transparent text-sm font-semibold rounded-xl text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg ${
-                  loading ? "opacity-70 cursor-not-allowed" : "hover:shadow-xl"
-                }`}
+                className={`group relative w-full flex justify-center items-center py-3 px-4 border border-transparent text-sm font-semibold rounded-xl text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transform transition-all duration-300 hover:scale-[1.02] hover:shadow-lg ${loading ? "opacity-70 cursor-not-allowed" : "hover:shadow-xl"
+                  }`}
               >
                 {loading ? (
                   <>
