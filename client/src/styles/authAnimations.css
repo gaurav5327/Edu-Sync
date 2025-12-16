@@ -1,0 +1,293 @@
+/* 
+ * Shared CSS Animations and Keyframes for Authentication Pages
+ * Extracted from HomePage for consistent styling across auth components
+ */
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Base scroll animate styles */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
+
+.scroll-animate.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animation Variants */
+
+/* Fade In Up Animation */
+.scroll-animate[data-animate="fadeInUp"] {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
+
+.scroll-animate[data-animate="fadeInUp"].animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade In Left Animation */
+.scroll-animate[data-animate="fadeInLeft"] {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: all 0.8s ease-out;
+}
+
+.scroll-animate[data-animate="fadeInLeft"].animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Fade In Right Animation */
+.scroll-animate[data-animate="fadeInRight"] {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.8s ease-out;
+}
+
+.scroll-animate[data-animate="fadeInRight"].animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Scale In Animation */
+.scroll-animate[data-animate="scaleIn"] {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.8s ease-out;
+}
+
+.scroll-animate[data-animate="scaleIn"].animate {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Keyframe Animations */
+
+/* Enhanced floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  66% {
+    transform: translateY(5px) rotate(-1deg);
+  }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Gradient text animation */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient-shift 4s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Auth-specific animations */
+
+/* Pulse animation for buttons and interactive elements */
+@keyframes auth-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+}
+
+.auth-pulse {
+  animation: auth-pulse 2s infinite;
+}
+
+/* Loading spinner animation */
+@keyframes auth-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.auth-spin {
+  animation: auth-spin 1s linear infinite;
+}
+
+/* Error shake animation */
+@keyframes auth-shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+.auth-shake {
+  animation: auth-shake 0.5s ease-in-out;
+}
+
+/* Success bounce animation */
+@keyframes auth-bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.auth-bounce {
+  animation: auth-bounce 1s ease-in-out;
+}
+
+/* Slide in from bottom */
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-up {
+  animation: slideInUp 0.6s ease-out;
+}
+
+/* Slide in from top */
+@keyframes slideInDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-down {
+  animation: slideInDown 0.6s ease-out;
+}
+
+/* Utility Classes */
+
+/* Backdrop blur enhancement */
+.auth-backdrop-blur {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Form field focus animations */
+.auth-input-focus {
+  transition: all 0.3s ease;
+}
+
+.auth-input-focus:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Button hover animations */
+.auth-button-hover {
+  transition: all 0.3s ease;
+}
+
+.auth-button-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25);
+}
+
+/* Card hover effects */
+.auth-card-hover {
+  transition: all 0.3s ease;
+}
+
+.auth-card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+}
+
+/* Glow effects */
+.auth-glow {
+  box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+.auth-glow:hover {
+  box-shadow: 0 0 30px rgba(147, 51, 234, 0.5);
+}
+
+/* Responsive animations - reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-animate,
+  .float-animation,
+  .gradient-text,
+  .auth-pulse,
+  .auth-spin,
+  .auth-shake,
+  .auth-bounce,
+  .slide-in-up,
+  .slide-in-down {
+    animation: none;
+    transition: none;
+  }
+  
+  .scroll-animate {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .scroll-animate {
+    transform: translateY(20px);
+  }
+  
+  .scroll-animate[data-animate="fadeInLeft"],
+  .scroll-animate[data-animate="fadeInRight"] {
+    transform: translateY(20px);
+  }
+  
+  .scroll-animate[data-animate="fadeInLeft"].animate,
+  .scroll-animate[data-animate="fadeInRight"].animate {
+    transform: translateY(0);
+  }
+}

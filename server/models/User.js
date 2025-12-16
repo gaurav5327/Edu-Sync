@@ -1,0 +1,49 @@
+import mongoose from "mongoose"
+import bcrypt from "bcrypt"
+
+const userSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    role: { type: String, enum: ["admin", "teacher", "student"], required: true },
+    department: { type: String, required: true },
+    // For teachers: which years they can teach
+    teachableYears: [{ type: Number, min: 1, max: 4 }],
+    // For students: which year they are in
+    year: { type: Number, min: 1, max: 4 },
+    // For students: which division they are in
+    division: { type: String },
+    // For teachers: their availability - stored as a nested object
+    availability: {
+        type: Object,
+        default: {},
+    },
+    createdAt: { type: Date, default: Date.now },
+    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    expertise: [{ type: String }], // e.g., subject areas or course codes a teacher can teach
+    maxWeeklyLoad: { type: Number, default: 20 }, // max weekly sessions a teacher prefers
+    maxDailyLoad: { type: Number, default: 5 }, // max daily sessions a teacher prefers
+})
+
+// Hash password before saving
+userSchema.pre("save", async function(next) {
+    if (!this.isModified("password")) return next()
+    try {
+        const salt = await bcrypt.genSalt(10)
+        this.password = await bcrypt.hash(this.password, salt)
+        next()
+    } catch (error) {
+        next(error)
+    }
+})
+
+// Method to compare passwords
+userSchema.methods.comparePassword = async function(candidatePassword) {
+    try {
+        return await bcrypt.compare(candidatePassword, this.password)
+    } catch (error) {
+        throw error
+    }
+}
+
+export default mongoose.model("User", userSchema)
