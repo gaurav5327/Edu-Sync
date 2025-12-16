@@ -44,6 +44,7 @@ function AdminRegistration() {
     department: "Administration",
   });
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [fieldErrors, setFieldErrors] = useState({});
@@ -101,6 +102,7 @@ function AdminRegistration() {
         name: formData.name,
       });
       toast.success(successMsg);
+      setSuccess(true);
 
       setFormData({
         name: "",
@@ -252,11 +254,10 @@ function AdminRegistration() {
                             required
                             value={formData.name}
                             onChange={handleChange}
-                            className={`block w-full pl-10 pr-3 py-3 border rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 ${
-                              fieldErrors.name
-                                ? "border-red-300 bg-red-50"
-                                : "border-gray-300 bg-white/50"
-                            }`}
+                            className={`block w-full pl-10 pr-3 py-3 border rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 ${fieldErrors.name
+                              ? "border-red-300 bg-red-50"
+                              : "border-gray-300 bg-white/50"
+                              }`}
                             placeholder="Enter your full name"
                           />
                         </div>
@@ -287,11 +288,10 @@ function AdminRegistration() {
                             required
                             value={formData.email}
                             onChange={handleChange}
-                            className={`block w-full pl-10 pr-3 py-3 border rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 ${
-                              fieldErrors.email
-                                ? "border-red-300 bg-red-50"
-                                : "border-gray-300 bg-white/50"
-                            }`}
+                            className={`block w-full pl-10 pr-3 py-3 border rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 ${fieldErrors.email
+                              ? "border-red-300 bg-red-50"
+                              : "border-gray-300 bg-white/50"
+                              }`}
                             placeholder="Enter your email address"
                           />
                         </div>
@@ -322,11 +322,10 @@ function AdminRegistration() {
                             required
                             value={formData.password}
                             onChange={handleChange}
-                            className={`block w-full pl-10 pr-12 py-3 border rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 ${
-                              fieldErrors.password
-                                ? "border-red-300 bg-red-50"
-                                : "border-gray-300 bg-white/50"
-                            }`}
+                            className={`block w-full pl-10 pr-12 py-3 border rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 ${fieldErrors.password
+                              ? "border-red-300 bg-red-50"
+                              : "border-gray-300 bg-white/50"
+                              }`}
                             placeholder="Create a strong password"
                           />
                           <button
@@ -368,11 +367,10 @@ function AdminRegistration() {
                             required
                             value={formData.confirmPassword}
                             onChange={handleChange}
-                            className={`block w-full pl-10 pr-12 py-3 border rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 ${
-                              fieldErrors.confirmPassword
-                                ? "border-red-300 bg-red-50"
-                                : "border-gray-300 bg-white/50"
-                            }`}
+                            className={`block w-full pl-10 pr-12 py-3 border rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 ${fieldErrors.confirmPassword
+                              ? "border-red-300 bg-red-50"
+                              : "border-gray-300 bg-white/50"
+                              }`}
                             placeholder="Confirm your password"
                           />
                           <button
@@ -415,11 +413,10 @@ function AdminRegistration() {
                             required
                             value={formData.adminId}
                             onChange={handleChange}
-                            className={`block w-full pl-10 pr-3 py-3 border rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 ${
-                              fieldErrors.adminId
-                                ? "border-red-300 bg-red-50"
-                                : "border-gray-300 bg-white/50"
-                            }`}
+                            className={`block w-full pl-10 pr-3 py-3 border rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 ${fieldErrors.adminId
+                              ? "border-red-300 bg-red-50"
+                              : "border-gray-300 bg-white/50"
+                              }`}
                             placeholder="Enter your admin ID"
                           />
                         </div>
@@ -458,9 +455,8 @@ function AdminRegistration() {
                       <button
                         type="submit"
                         disabled={loading}
-                        className={`w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 transform hover:scale-105 ${
-                          loading ? "opacity-70 cursor-not-allowed" : ""
-                        }`}
+                        className={`w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 transform hover:scale-105 ${loading ? "opacity-70 cursor-not-allowed" : ""
+                          }`}
                       >
                         {loading ? (
                           <>
