@@ -1,5 +1,11 @@
 {
+  "name": "edusync-server",
+  "version": "1.0.0",
   "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "build": "echo 'No build step required'"
+  },
   "dependencies": {
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
